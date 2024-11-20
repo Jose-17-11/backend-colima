@@ -1,26 +1,17 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import { connection } from './bd.js';
+import cors from 'cors'
+import userRoutes from './routes/user.routes.js';
+import auth from './routes/auth.routes.js'
 
 dotenv.config();
 
-const port = 3000;
+const port = process.env.PORT;
 const app = express();
-
-// Espera a que la conexión se haya establecido correctamente
-app.get('/', async (req, res) => {
-    try {
-        // Asegúrate de que la conexión esté lista antes de consultar
-        await connection();
-
-        // Realiza la consulta a la base de datos después de la conexión
-        const result = await mongoose.connection.db.collection('prueba').find().toArray();
-        res.send(result);
-    } catch (err) {
-        res.status(500).send("Error al consultar la base de datos: " + err);
-    }
-});
+app.use(cors())
+app.use(express.json())
+app.use(auth)
+app.use(userRoutes)
 
 app.listen(port, () => {
     console.log(`server running in port ${port}`);
