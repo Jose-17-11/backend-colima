@@ -54,7 +54,7 @@ export const createDispositivo = async (userData) => {
         await newUser.save(); // Guardar en la base de datos
         return newUser;
     } catch (error) {
-        console.error("Error al crear un usuario:", error);
+        console.error("Error al agregar el dispositivo:", error);
         throw error;
     }
 };

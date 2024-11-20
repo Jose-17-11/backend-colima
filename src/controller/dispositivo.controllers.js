@@ -24,7 +24,7 @@ export const register = async (req, res) => {
         console.log(userId);
         
         // Agregar el ID del usuario al objeto Data
-        const Data = { userId: userId, ...req.body };
+        const Data = { ...req.body, userId: userId };
         console.log(Data);
         
         const newDispositivo = await createDispositivo(Data);
