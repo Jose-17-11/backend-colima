@@ -1,5 +1,6 @@
 
 ## Formato para recibir un usuario al iniciar sesion
+endpoint tipo POST: http://200.234.224.102/user
 ````
 {
   "correo":"juan.perez@example.com",
@@ -8,6 +9,7 @@
 ````
 
 ## Formato para recibir un nuevo usuario registrado
+endpoint tipo POST: http://200.234.224.102/register
 ````
 {
     "nombre": "María",
@@ -22,6 +24,7 @@
 ````
 
 ## Formato para agregar dispositivo a un usuario
+endpoint tipo POST: localhost:3000/dispositivo
 ````
 {
     "id":"71iqo23iojw-lksnlklsnjskjiwqk",

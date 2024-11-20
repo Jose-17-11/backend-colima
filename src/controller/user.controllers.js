@@ -36,6 +36,8 @@ export const logueo = async (req, res) => {
         JWT_SECRET,
         { expiresIn: '10m' } // El token expirará en 10 minutos
     );
+    console.log(user.id);
+    
 
     res.cookie('accessToken', accessToken, {
         httpOnly: true,  // Hace que la cookie no sea accesible a través de JavaScript

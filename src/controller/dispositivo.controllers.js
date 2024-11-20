@@ -12,8 +12,21 @@ export const read = async (req, res) => {
 
 // Registra un nuevo dispositivo como propiedad del usuario
 export const register = async (req, res) => {
-    const Data = req.body;
     try {
+        // Obtener el ID del usuario desde las cookies (asumimos que se llama 'userId')
+        const userId = req.cookies.userId;
+
+        // Verificar si el ID del usuario está presente en las cookies
+        if (!userId) {
+            return res.status(400).json({ message: "No se encontró el ID de usuario en las cookies" });
+        }
+
+        console.log(userId);
+        
+        // Agregar el ID del usuario al objeto Data
+        const Data = { userId: userId, ...req.body };
+        console.log(Data);
+        
         const newDispositivo = await createDispositivo(Data);
         res.status(201).json({ message: "Dispositivo agregado exitosamente", user: newDispositivo });
     } catch (error) {

@@ -4,12 +4,16 @@ import cors from 'cors'
 import userRoutes from './routes/user.routes.js';
 import dispositivosRoutes from './routes/dispositivo.routes.js';
 import auth from './routes/auth.routes.js'
+import cookieParser from 'cookie-parser';
+
+
 
 dotenv.config();
 
 const port = process.env.PORT;
 const app = express();
 
+app.use(cookieParser()); 
 app.use(cors())
 app.use(express.json())
 app.use(userRoutes)
