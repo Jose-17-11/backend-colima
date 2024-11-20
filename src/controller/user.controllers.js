@@ -1,4 +1,7 @@
+import jwt from 'jsonwebtoken';
 import { getData, login, createUser } from "../model/user.model.js";
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
 export const read = async (req, res) => {
     try {
@@ -10,20 +13,32 @@ export const read = async (req, res) => {
     }
 };
 
-
 export const logueo = async (req, res) => {
     const { correo, contraseña } = req.body;
-    try {
-        const user = await login(correo, contraseña);
-        if (!user) {
-            return res.status(404).json({ message: "Usuario no encontrado o credenciales inválidas" });
-        }
-        res.status(200).json({ message: "Usuario encontrado", user });
-    } catch (error) {
-        console.error("Error durante el inicio de sesión:", error);
-        res.status(500).json({ message: "Error interno del servidor", error });
+
+    // Verificar si el usuario existe
+    const user = await login(correo, contraseña);
+    if (!user) {
+        return res.status(401).json({ message: "Credenciales inválidas" });
     }
+
+    // Verificar la contraseña (asegúrate de hacerlo de manera segura)
+    // Si es necesario, usa bcrypt para comparar contraseñas hash
+    if (user.contraseña !== contraseña) {
+        return res.status(401).json({ message: "Credenciales inválidas" });
+    }
+
+    // Generar el token JWT
+    const accessToken = jwt.sign(
+        { correo: user.correo, id: user.id },
+        JWT_SECRET,
+        { expiresIn: '10m' } // El token expirará en 10 minutos
+    );
+
+    // Enviar el token al cliente
+    res.json({ accessToken });
 };
+
 
 export const register = async (req, res) => {
     const userData = req.body;

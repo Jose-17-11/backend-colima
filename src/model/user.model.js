@@ -1,7 +1,17 @@
 import mongoose from 'mongoose';
 import { connection } from '../bd.js';
 
-// Definir el esquema del modelo de usuario
+// Define el esquema de usuario para cuando se va a loguear el usuario
+const userSchemaLogueo = new mongoose.Schema({
+    correo: String,
+    contraseña: String
+}, { strict: false }); // Puedes ajustar el esquema si necesitas más campos
+
+// Intenta obtener el modelo existente, o crea uno nuevo si no existe
+const Usuario = mongoose.models.usuarios || mongoose.model('usuarios', userSchemaLogueo);
+
+
+// Definir el esquema del modelo de usuario para darlo de alta
 const userSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
     apellidoM: { type: String, required: true },
@@ -32,11 +42,10 @@ export const getData = async () => {
 export const login = async (email, password) => {
     try {
         await connection();
-        const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
-        const user = await usuarios.findOne({ correo: email, contraseña: password });
-        return user
+        const user = await Usuario.findOne({ correo: email, contraseña: password });
+        return user;
     } catch (error) {
-        console.error("Error al buscar usuario por correo y contraseña:", error);
+        console.error("Error al buscar usuario popasswordr correo y contraseña:", error);
         throw error;
     }
 }

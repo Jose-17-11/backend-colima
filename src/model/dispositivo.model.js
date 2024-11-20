@@ -24,6 +24,10 @@ const dispositivoSchema = new mongoose.Schema({
     edificio: { 
         type: String, 
         required: true 
+    },
+    userId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Usuario', required: true 
     }
 });
 
