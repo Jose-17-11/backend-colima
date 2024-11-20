@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { read, create, update, deleted } from "../controller/user.controllers.js";
+import { read, logueo, register, update, deleted } from "../controller/user.controllers.js";
 
 const router = Router()
 
-router.get('/user',read)
+router.get('/user', read)
 
-router.post('/user', create)
+router.post('/user', logueo)
+
+router.post('/register', register)
 
 router.put('/user', update)
 
