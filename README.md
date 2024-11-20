@@ -20,3 +20,14 @@
     "contraseña": "secure_password"
 }
 ````
+
+## Formato para agregar dispositivo a un usuario
+````
+{
+    "id":"71iqo23iojw-lksnlklsnjskjiwqk",
+    "nombreArea": "Sala de servidores",
+    "metrosCuadrados": 50,
+    "tipoConsumo": "220v",
+    "edificio": "Edificio A"
+}
+````
