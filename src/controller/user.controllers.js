@@ -1,16 +1,18 @@
 import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 import { getData, login, createUser } from "../model/user.model.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
 export const read = async (req, res) => {
-    try {
-        const usuarios = await getData(); // Llamar a la función asíncrona para obtener los usuarios
-        res.status(200).json(usuarios); // Enviar los datos como respuesta JSON
-    } catch (error) {
-        console.error("Error al obtener usuarios:", error);
-        res.status(500).json({ message: "Error al obtener usuarios", error });
-    }
+    res.send("hello world xD")
+    // try {
+    //     const usuarios = await getData(); // Llamar a la función asíncrona para obtener los usuarios
+    //     res.status(200).json(usuarios); // Enviar los datos como respuesta JSON
+    // } catch (error) {
+    //     console.error("Error al obtener usuarios:", error);
+    //     res.status(500).json({ message: "Error al obtener usuarios", error });
+    // }
 };
 
 export const logueo = async (req, res) => {
@@ -34,6 +36,20 @@ export const logueo = async (req, res) => {
         JWT_SECRET,
         { expiresIn: '10m' } // El token expirará en 10 minutos
     );
+
+    res.cookie('accessToken', accessToken, {
+        httpOnly: true,  // Hace que la cookie no sea accesible a través de JavaScript
+        secure: process.env.NODE_ENV === 'production',  // Solo se envía sobre HTTPS en producción
+        maxAge: 10 * 60 * 1000,  // La cookie expirará en 10 minutos (en milisegundos)
+        sameSite: 'Strict',  // Previene el envío de cookies en solicitudes de sitios cruzados
+    });
+
+    res.cookie('userId', user._id, {
+        httpOnly: true, // Hace que la cookie no sea accesible a través de JavaScript
+        secure: process.env.NODE_ENV === 'production',  // Solo se envía sobre HTTPS en producción
+        maxAge: 10 * 60 * 1000,  // La cookie expirará en 10 minutos (en milisegundos)
+        sameSite: 'Strict',  // Previene el envío de cookies en solicitudes de sitios cruzados
+    });
 
     // Enviar el token al cliente
     res.json({ accessToken });
