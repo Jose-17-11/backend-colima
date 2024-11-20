@@ -14,7 +14,7 @@ export const read = async (req, res) => {
 export const register = async (req, res) => {
     try {
         // Obtener el ID del usuario desde las cookies (asumimos que se llama 'userId')
-        const userId = req.cookies.userId;
+        const userId = await req.cookies.userId;
 
         // Verificar si el ID del usuario está presente en las cookies
         if (!userId) {
