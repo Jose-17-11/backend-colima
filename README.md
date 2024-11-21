@@ -24,7 +24,7 @@ endpoint tipo POST: http://200.234.224.102/register
 ````
 
 ## Formato para agregar dispositivo a un usuario
-endpoint tipo POST: localhost:3000/dispositivo
+endpoint tipo POST: http://200.234.224.102/dispositivo
 ````
 {
     "id":"71iqo23iojw-lksnlklsnjskjiwqk",
