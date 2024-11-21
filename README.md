@@ -3,7 +3,7 @@
 docker compose logs -f backend
 
 ## Formato para recibir los datos de un usuario en especifico
-endpoint tipo GET: http://200.234.224.102/673e199a5c3926427e81db00
+endpoint tipo GET: http://200.234.224.102/user/673e199a5c3926427e81db00
 Lo unico que necesario seria obtener el id del localstorage y agregarlo como parametro en la url del endpoint
 
 ## Formato para recibir un usuario al iniciar sesion
