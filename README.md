@@ -2,11 +2,13 @@
 ## Checar logs de backend docker producción
 docker compose logs -f backend
 
+<!--                             Endpoints de usuarios                                         -->
+
 ## Formato para recibir los datos de un usuario en especifico
 endpoint tipo GET: http://200.234.224.102/user/673e199a5c3926427e81db00
 Lo unico que necesario seria obtener el id del localstorage y agregarlo como parametro en la url del endpoint
 
-## Formato para recibir un usuario al iniciar sesion
+## Formato para ingresar un usuario al iniciar sesion
 endpoint tipo POST: http://200.234.224.102/user
 ````
 {
@@ -15,7 +17,7 @@ endpoint tipo POST: http://200.234.224.102/user
 }
 ````
 
-## Formato para recibir un nuevo usuario registrado
+## Formato para registrar un nuevo usuario
 endpoint tipo POST: http://200.234.224.102/register
 ````
 {
@@ -29,7 +31,7 @@ endpoint tipo POST: http://200.234.224.102/register
     "contraseña": "secure_password"
 }
 ````
-
+<!--                                    Endpoints de dispositivos                                 -->
 ## Formato para obtener dispositivos que son propiedad de un usuario logueado
 endpoint tipo GET: http://200.234.224.102/dispositivo/ID_USER
 
@@ -45,6 +47,7 @@ endpoint tipo POST: http://200.234.224.102/dispositivo
 }
 ````
 
+<!--                                       Endpoints para el monitoreo del sensor                    -->
 ## Formato para almacenar datos de sensor
 endpoint POST http://200.234.224.102/monitoreo
 ### Hay posibles objetos que puede recibir el endpoint entre esos los siguientes objetos

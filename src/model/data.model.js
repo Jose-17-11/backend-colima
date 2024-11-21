@@ -16,6 +16,8 @@ const consumoSchema = new mongoose.Schema({
 // Definir el modelo (asegúrate de no duplicarlo)
 const ConsumoModel = mongoose.models.consumos || mongoose.model('monitoreo', consumoSchema);
 
+const ConsumoModelCreate = mongoose.models.consumos || mongoose.model('monitoreo', consumoSchema);
+
 // Función para obtener datos de la colección
 export const getDataDispositivo = async (dispositivoId) => {
     try {
@@ -30,10 +32,11 @@ export const getDataDispositivo = async (dispositivoId) => {
 };
 
 // Función para crear un usuario
-export const createData = async (userData) => {
+export const createDataDispositivo = async (userData) => {
     try {
         await connection(); // Conectar a la base de datos si no está conectada
-        const newUser = new DispositivoModel(userData); // Crear un nuevo usuario
+        const data = await ConsumoModelCreate.find(userData)
+        console.log(data);
         await newUser.save(); // Guardar en la base de datos
         return newUser;
     } catch (error) {
