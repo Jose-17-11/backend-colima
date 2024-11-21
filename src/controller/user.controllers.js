@@ -54,7 +54,7 @@ export const logueo = async (req, res) => {
     });
 
     // Enviar el token al cliente
-    res.json({ accessToken });
+    res.json({  accessToken, userId: user._id  });
 };
 
 
