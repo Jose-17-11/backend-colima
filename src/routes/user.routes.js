@@ -3,7 +3,7 @@ import { read, logueo, register, update, deleted } from "../controller/user.cont
 
 const router = Router()
 
-router.get('/user', read)
+router.get('/user/:userId', read)
 
 router.post('/user', logueo)
 

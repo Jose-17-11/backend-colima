@@ -10,29 +10,31 @@ const userSchemaLogueo = new mongoose.Schema({
 // Intenta obtener el modelo existente, o crea uno nuevo si no existe
 const Usuario = mongoose.models.usuarios || mongoose.model('usuarios', userSchemaLogueo);
 
-
-// Definir el esquema del modelo de usuario para darlo de alta
 const userSchema = new mongoose.Schema({
-    nombre: { type: String, required: true },
-    apellidoM: { type: String, required: true },
-    apellidoP: { type: String, required: true },
-    edad: { type: Number, required: true },
-    pais: { type: String, required: true },
-    correo: { type: String, required: true, unique: true },
-    telefono: { type: String, required: true },
-    contraseña: { type: String, required: true }
-});
+    nombre:  String,
+    apellidoM:  String,
+    apellidoP:  String,
+    edad: Number,
+    pais:  String,
+    correo:  { type: String, unique: true },
+    telefono:  String,
+    contraseña:  String
+}, { strict: false });
 
-// Verificar si el modelo ya está registrado antes de crearlo
+// Definir el modelo (asegúrate de no duplicarlo)
 const UserModel = mongoose.models.usuarios || mongoose.model('usuarios', userSchema);
 
-
-// Función para obtener datos de la colección
-export const getData = async () => {
+export const getData = async (userId) => {
     try {
-        await connection(); 
-        // const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
-        return await UserModel.find({});
+        await connection(); // Establecer la conexión con la base de datos
+        console.log("ID recibido:", userId);
+        const user = await UserModel.findOne({_id: userId})
+        console.log("Objeto en teoria", user);
+        
+        if (!user) {
+            throw new Error("Usuario no encontrado");
+        }   
+        return user;
     } catch (error) {
         console.error("Error al obtener usuarios desde la base de datos:", error);
         throw error; 
