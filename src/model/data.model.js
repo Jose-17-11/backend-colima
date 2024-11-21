@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { connection } from '../bd.js';
 
 const consumoSchema = new mongoose.Schema({
-    dispositivo_id: { type: String, ref: 'Dispositivo', required: true },
+    dispositivo_id: { type: String, ref: 'monitoreo', required: true },
     consumo: {
         cada5min: { type: Number, required: true },
         cada10min: { type: Number, required: true },
