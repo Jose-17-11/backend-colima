@@ -1,4 +1,7 @@
 
+## Checar logs de backend docker producción
+docker compose logs -f backend
+
 ## Formato para recibir un usuario al iniciar sesion
 endpoint tipo POST: http://200.234.224.102/user
 ````
