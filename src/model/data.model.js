@@ -1,14 +1,30 @@
 import mongoose from 'mongoose';
 import { connection } from '../bd.js';
 
+const consumoSchema = new mongoose.Schema({
+    dispositivo_id: { type: String, ref: 'Dispositivo', required: true },
+    consumo: {
+        cada5min: { type: Number, required: true },
+        cada10min: { type: Number, required: true },
+        cadaHora: { type: Number, required: true }
+    },
+    acumulativoSemanal: { type: Number, required: true },
+    fecha: { type: String, required: true },
+    hora: { type: String, required: true }
+}, { strict: true });
+
+// Definir el modelo (asegúrate de no duplicarlo)
+const ConsumoModel = mongoose.models.consumos || mongoose.model('monitoreo', consumoSchema);
+
 // Función para obtener datos de la colección
-export const getData = async () => {
+export const getDataDispositivo = async (dispositivoId) => {
     try {
         await connection(); 
-        const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
-        return await usuarios.find({});
+        const data = await ConsumoModel.find({ dispositivo_id: dispositivoId })
+        console.log(data);
+        return data
     } catch (error) {
-        console.error("Error al obtener usuarios desde la base de datos:", error);
+        console.error("Error al obtener monitoreo desde la base de datos:", error);
         throw error; 
     }
 };

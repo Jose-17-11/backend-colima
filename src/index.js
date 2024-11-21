@@ -4,6 +4,7 @@ import cors from 'cors'
 import userRoutes from './routes/user.routes.js';
 import dispositivosRoutes from './routes/dispositivo.routes.js';
 import monitoreoRoutes from './routes/monitoreo.routes.js'
+import dataMonitoreoRouter from './routes/data.routes.js'
 import auth from './routes/auth.routes.js'
 import cookieParser from 'cookie-parser';
 
@@ -18,6 +19,7 @@ app.use(express.json())
 app.use(userRoutes)
 app.use(dispositivosRoutes)
 app.use(monitoreoRoutes)
+app.use(dataMonitoreoRouter)
 app.use(auth)
 
 app.listen(port, () => {
