@@ -31,8 +31,8 @@ const UserModel = mongoose.models.usuarios || mongoose.model('usuarios', userSch
 export const getData = async () => {
     try {
         await connection(); 
-        const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
-        return await usuarios.find({});
+        // const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
+        return await UserModel.find({});
     } catch (error) {
         console.error("Error al obtener usuarios desde la base de datos:", error);
         throw error; 
