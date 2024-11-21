@@ -25,11 +25,3 @@ export const createData = async (userData) => {
         throw error;
     }
 };
-
-export const updateData = () => {
-
-}
-
-export const deleteData = () => {
-
-}

@@ -38,20 +38,3 @@ export const register = async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor", error });
     }
 };
-
-
-export const update = async (req, res) => {
-    try {
-        res.send("Hello update XD")
-    } catch (error) {
-        
-    }
-}
-
-export const deleted = async (req, res) => {
-    try {
-        res.send("Hello delete XD")
-    } catch (error) {
-        
-    }
-}
