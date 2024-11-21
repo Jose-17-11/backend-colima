@@ -32,12 +32,24 @@ const dispositivoSchema = new mongoose.Schema({
 // Verificar si el modelo ya está registrado antes de crearlo
 const DispositivoModel = mongoose.models.dispositivos || mongoose.model('dispositivos', dispositivoSchema);
 
+const dispositivoSchemaData = new mongoose.Schema({
+    id: { type: String, required: true },
+    nombreArea: { type: String, required: true },
+    metrosCuadrados: { type: Number, required: true },
+    tipoConsumo: { type: String, required: true },
+    edificio: { type: String, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
+    __v: { type: Number }
+}, { strict: true });
+
+const DispositivoModelData = mongoose.models.dispositivos || mongoose.model('dispositivo', dispositivoSchemaData);
+
+
 // Función para obtener datos de la colección
-export const getDispositivos = async () => {
+export const getDispositivos = async (userIdea) => {
     try {
         await connection(); 
-        const usuarios = mongoose.model('dispositivo', new mongoose.Schema({}, { strict: false }));
-        return await usuarios.find({});
+        return await DispositivoModelData.find({userId: userIdea});
     } catch (error) {
         console.error("Error al obtener usuarios desde la base de datos:", error);
         throw error; 

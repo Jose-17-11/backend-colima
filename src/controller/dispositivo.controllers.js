@@ -2,7 +2,8 @@ import { getDispositivos, createDispositivo } from "../model/dispositivo.model.j
 // Obtener todos los dispositivos del usuario
 export const read = async (req, res) => {
     try {
-        const usuarios = await getDispositivos(); // Llamar a la función asíncrona para obtener los usuarios
+        const { userId } = req.params
+        const usuarios = await getDispositivos(userId); // Llamar a la función asíncrona para obtener los usuarios
         res.status(200).json(usuarios); // Enviar los datos como respuesta JSON
     } catch (error) {
         console.error("Error al obtener usuarios:", error);
