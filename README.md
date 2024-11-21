@@ -49,7 +49,7 @@ endpoint tipo POST: http://200.234.224.102/dispositivo
 
 <!--                                       Endpoints para el monitoreo del sensor                    -->
 ## Formato para almacenar datos de sensor
-endpoint POST http://200.234.224.102/monitoreo
+endpoint POST: http://200.234.224.102/monitoreo
 ### Hay posibles objetos que puede recibir el endpoint entre esos los siguientes objetos
 {
   "dispositivo_id": "60c72b2f9e1d8a001f8c6d0e",
@@ -67,3 +67,8 @@ endpoint POST http://200.234.224.102/monitoreo
   },
   "acumulativoSemanal": 840
 }
+
+
+## Formato para obtener los datos de consumo o monitoreo en base al id de un dispositivo
+
+endpoint GET: http://localhost:3000/data/ID_DISPOSITIVO
