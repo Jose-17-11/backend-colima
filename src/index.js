@@ -7,8 +7,6 @@ import monitoreoRoutes from './routes/monitoreo.routes.js'
 import auth from './routes/auth.routes.js'
 import cookieParser from 'cookie-parser';
 
-
-
 dotenv.config();
 
 const port = process.env.PORT;

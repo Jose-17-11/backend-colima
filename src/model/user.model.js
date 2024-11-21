@@ -30,7 +30,6 @@ export const getData = async (userId) => {
         console.log("ID recibido:", userId);
         const user = await UserModel.findOne({_id: userId})
         console.log("Objeto en teoria", user);
-        
         if (!user) {
             throw new Error("Usuario no encontrado");
         }   
@@ -64,12 +63,3 @@ export const createUser = async (userData) => {
         throw error;
     }
 };
-
-
-export const updateData = () => {
-
-}
-
-export const deleteData = () => {
-
-}
