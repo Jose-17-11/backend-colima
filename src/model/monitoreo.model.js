@@ -2,20 +2,46 @@ import mongoose from 'mongoose';
 import { connection } from '../bd.js';
 
 const monitoreoSchema = new mongoose.Schema({
-    idDispositivo: { type: mongoose.Schema.Types.ObjectId, ref: 'dispositivo', required: true },
-    consumo5min: { type: Number, required: true },
-    consumo10min: { type: Number, required: true },
-    consumoKwH: { type: Number, required: true },
-    fecha: { type: Date, required: true },
-    hora: { type: String, required: true },
-    consumoSemana: { type: Number, required: true }
+    dispositivo_id: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'dispositivo', 
+        required: true 
+    },
+    consumo: {
+        cada5min: { type: Number, required: false },
+        cada10min: { type: Number, required: false },
+        cadaHora: { type: Number, required: false }
+    },
+    acumulativoSemanal: { 
+        type: Number, 
+        required: false 
+    },
+    fecha: { 
+        type: String, 
+        required: true 
+    },
+    hora: { 
+        type: String, 
+        required: true 
+    }
 });
 
-const monitoreoModel = mongoose.models.dispositivos || mongoose.model('monitoreo', dispositivoSchema);
+const Monitoreo = mongoose.models.Monitoreo || mongoose.model('Monitoreo', monitoreoSchema);
 
-const readData = () => {
+export const crearMonitoreo = async (data) => {
+    connection()
+    const monitoreo = new Monitoreo({
+        dispositivo_id: data.dispositivo_id,
+        consumo: data.consumo || {}, // Si no hay datos de consumo, se guarda como un objeto vacío
+        acumulativoSemanal: data.acumulativoSemanal || 0, // Si no hay acumulativo, se guarda como 0
+        fecha: data.fecha,
+        hora: data.hora
+    });
 
-}
-const postData = () => {
-
-}
+    try {
+        await monitoreo.save();
+        return monitoreo;
+    } catch (error) {
+        throw new Error('Error al guardar monitoreo: ' + error.message);
+    }
+};

@@ -1,11 +1,8 @@
 import { Router } from "express";
+import { insertarMonitoreo } from "../controller/monitoreo.controlles.js";
 
 const router = Router();
 
-router.get('/monitoreo', )
+router.post('/monitoreo', insertarMonitoreo)
 
-router.post('/monitoreo', )
-
-router.put('/monitoreo', )
-
-router.delete('/monitoreo', )
+export default router
