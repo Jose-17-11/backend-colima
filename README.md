@@ -30,6 +30,9 @@ endpoint tipo POST: http://200.234.224.102/register
 }
 ````
 
+## Formato para obtener dispositivos que son propiedad de un usuario logueado
+endpoint tipo GET: http://200.234.224.102/dispositivo/ID_USER
+
 ## Formato para agregar dispositivo a un usuario
 endpoint tipo POST: http://200.234.224.102/dispositivo
 ````
