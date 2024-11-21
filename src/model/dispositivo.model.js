@@ -18,8 +18,6 @@ const dispositivoSchema = new mongoose.Schema({
     tipoConsumo: { 
         type: String, 
         required: true, 
-        enum: ['120v', '220v'], // Opciones válidas
-        default: '120v' // Valor por defecto
     },
     edificio: { 
         type: String, 
