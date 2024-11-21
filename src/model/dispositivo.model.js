@@ -36,7 +36,7 @@ const DispositivoModel = mongoose.models.dispositivos || mongoose.model('disposi
 export const getDispositivos = async () => {
     try {
         await connection(); 
-        const usuarios = mongoose.model('usuarios', new mongoose.Schema({}, { strict: false }));
+        const usuarios = mongoose.model('dispositivo', new mongoose.Schema({}, { strict: false }));
         return await usuarios.find({});
     } catch (error) {
         console.error("Error al obtener usuarios desde la base de datos:", error);
