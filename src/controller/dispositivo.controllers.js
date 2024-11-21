@@ -14,18 +14,18 @@ export const read = async (req, res) => {
 export const register = async (req, res) => {
     try {
         // Obtener el ID del usuario desde las cookies (asumimos que se llama 'userId')
-        const userId = await req.cookies.userId;
+        // const userId = await req.cookies.userId;
 
         // Verificar si el ID del usuario está presente en las cookies
-        if (!userId) {
-            return res.status(400).json({ message: "No se encontró el ID de usuario en las cookies" });
-        }
+        // if (!userId) {
+        //     return res.status(400).json({ message: "No se encontró el ID de usuario en las cookies" });
+        // }
 
-        console.log(userId);
+        // console.log(userId);
         
         // Agregar el ID del usuario al objeto Data
-        const Data = { ...req.body, userId: userId };
-        console.log(Data);
+        // const Data = { ...req.body, userId: userId };
+        console.log(req.body);
         
         const newDispositivo = await createDispositivo(Data);
         res.status(201).json({ message: "Dispositivo agregado exitosamente", user: newDispositivo });
